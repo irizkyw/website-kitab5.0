@@ -19,3 +19,15 @@ Route::get('/', function () {
 Route::get('/homepage', function () {
     return view('homepage');
 });
+Route::get('/scripture', function () {
+    return view('scripture');
+});
+Route::get('/record', function () {
+    return view('record');
+});
+Route::get('/aboutUs', function () {
+    return view('aboutUs');
+});
+Route::get('/dashboard', function () {
+    return view('dashboard');
+});
