@@ -29,5 +29,5 @@ Route::get('/aboutUs', function () {
     return view('aboutUs');
 });
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('/dashboard/dashboard');
 });
