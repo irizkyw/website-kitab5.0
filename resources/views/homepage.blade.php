@@ -25,10 +25,10 @@
 
   <section class="header">
     <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
-      <div class="container-fluid mx-5">
-        <a1 class="navbar-brand mx-5" href="#">KitabSuci</a1>
+      <div class="container">
+        <a1 class="navbar-brand" href="#">KitabSuci</a1>
         <div class="collapse navbar-collapse navText" id="navbarNavAltMarkup">
-          <div class="navbar-nav mx-auto login">
+          <div class="navbar-nav ms-auto  login">
             <a class="nav-link" aria-current="page" href="#">Home</a>
             <a class="nav-link" aria-current="page"  href="#">Scripthure</a>
             <a class="nav-link" aria-current="page" href="#">Contact</a>
@@ -47,15 +47,38 @@
             Agama di Indonesia <br>
             <span2>Jangan lupakan ibadah dengan membaca kitab</span>
           </p>
-          <div class="landPict my-3">
-            <img src="./images/googleplay.png" alt="">
+          
+          <div class=" d-flex aligment-item-end">
+            <div class="landPict my-3">
+              <img src="./images/googleplay.png" alt="">
+            </div>
           </div>
           <!-- <div class="landPict">
             <img src="./images/kemenag.png" alt="">
           </div> -->
         </div>
-        <div class="col-sm-6 d-flex justify-content-center align-item-center">
+        <div class="col-sm-6 d-flex ms-auto justify-content-end p-0">
           <img src="./images/landingpage1.png" alt="">
+        </div>
+      </div>
+
+      <div class="row my-5">
+        <div class="d-flex desc border ">
+          <div class="col-sm-4">
+            <p>Aplikasi Agama <br>
+              <span>Terlengkap</span>
+            </p>
+          </div>
+          <div class="col-sm-4">
+            <p>Aplikasi Agama <br>
+              <span>Terlengkap</span>
+            </p>  
+          </div>
+          <div class="col-sm-4">
+            <p>Aplikasi Agama <br>
+              <span>Terlengkap</span>
+            </p>
+          </div>
         </div>
       </div>
     </div>

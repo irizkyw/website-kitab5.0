@@ -61,3 +61,24 @@
 /* .landPict{
     justify-content: space-between;
 } */
+
+.desc{
+    border-radius: 10px;
+    height: 150px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow:  5px 5px 10px #bababa,
+            -5px -5px 10px #ffffff;
+}
+
+.desc p{
+    line-height: 40px;
+    font-size: 20px;
+    color: #7D7D7D;
+}
+
+.desc span{
+    font-size: 48px;
+    color: #4DACB2;
+}
