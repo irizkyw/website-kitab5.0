@@ -25,11 +25,6 @@
     font-weight: 600;
 }
 
-/* .navText a{
-    align-items:end;
-    text-align:right;
-} */
-
 .login button{
     background-color: #4DACB2;
     color: #FFFFFF;
@@ -58,10 +53,6 @@
     font-size: 16px;
 }
 
-/* .landPict{
-    justify-content: space-between;
-} */
-
 .desc{
     border-radius: 10px;
     height: 150px;
@@ -83,6 +74,77 @@
     color: #4DACB2;
 }
 
-/* .landPict{
-    align-items:self-end;
-} */
+/* Login */
+.login_left p{
+    font-size: 48px;
+    text-align: center;
+    color: #64FCD9;
+    line-height: 38px;
+}
+
+.login_left span{
+    color: #111111;
+}
+
+.login_left span2{
+    font-size: 20px;
+    color: #7D7D7D;
+}
+
+.loginPage input{
+    border-radius: 201px;
+    height: 55px;
+}
+
+.buttonLgn{
+    background-color: #33D8D8;
+    border-radius: 5px;
+    width: 117px;
+    font-size: 21px;
+}
+
+.longBtn{
+    background-color: #33D8D8;
+    color: #FFFFFF;
+    border-radius: 201px;
+    height: 55px;
+    font-size: 21px;
+    text-align: center;
+}
+
+.forgotPass a{
+    color: #FFB61D;
+    text-decoration: none;
+}
+
+.email, .password, .nickname{
+    padding-left: 2rem;
+}
+
+.btnRegris p{
+    font-size: 20px;
+    color: #7D7D7D;
+}
+
+.btnRegris a{
+    color: #FFB61D;
+    text-decoration: none;
+}
+
+.login_right p{
+    font-size: 32px;
+    line-height: 40px;
+}
+
+.login_right span {
+    line-height: 80px;
+}
+
+.textPass p{
+    font-size: 10px;
+    line-height: 15px;
+    color: #ABABAB;
+    text-align: start;
+}
+
+
