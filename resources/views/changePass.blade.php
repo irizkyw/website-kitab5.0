@@ -59,7 +59,7 @@
                     <img src="images/changepass.png" alt="" />
                     <div class="text-center">
                         <p>"Iman harus ditegakkan dengan alasan. Ketika buta iman, ia mati."<br>
-                            <span><b>Mahatma Gandhiiiiiiiiii</b></span>
+                            <span><b>Mahatma Gandhi</b></span>
                         </p>
                     </div>
                 </div>
