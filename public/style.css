@@ -1,0 +1,150 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Navbar */
+.navbar{
+    /* width: 200px;
+    height: 100px;
+    background-color: #fff;
+    margin: 50px; */
+}
+
+.navbar a1{
+    font-size: 32px;
+    cursor: pointer;
+}
+
+.navbar-nav a{
+    font-size: 18px;
+    color: #111111;
+    margin-right: 1rem;
+    font-weight: 600;
+}
+
+.login button{
+    background-color: #4DACB2;
+    color: #FFFFFF;
+    font-size: 18px;
+    width: 117px;
+    height: 39px;
+    border-radius: 5px;
+}
+
+/* Content LandingPage */
+.landPage p{
+    font-size: 48px;
+    line-height: 60px;
+}
+
+.landPage span{
+    color: #4DACB2;
+}
+
+.landPage span2{
+    font-size: 20px;
+    color: #7D7D7D;
+}
+
+.landPict p{
+    font-size: 16px;
+}
+
+.desc{
+    border-radius: 10px;
+    height: 150px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow:  5px 5px 10px #bababa,
+            -5px -5px 10px #ffffff;
+}
+
+.desc p{
+    line-height: 40px;
+    font-size: 20px;
+    color: #7D7D7D;
+}
+
+.desc span{
+    font-size: 48px;
+    color: #4DACB2;
+}
+
+/* Login */
+.login_left p{
+    font-size: 48px;
+    text-align: center;
+    color: #64FCD9;
+    line-height: 38px;
+}
+
+.login_left span{
+    color: #111111;
+}
+
+.login_left span2{
+    font-size: 20px;
+    color: #7D7D7D;
+}
+
+.loginPage input{
+    border-radius: 201px;
+    height: 55px;
+}
+
+.buttonLgn{
+    background-color: #33D8D8;
+    border-radius: 5px;
+    width: 117px;
+    font-size: 21px;
+}
+
+.longBtn{
+    background-color: #33D8D8;
+    color: #FFFFFF;
+    border-radius: 201px;
+    height: 55px;
+    font-size: 21px;
+    text-align: center;
+}
+
+.forgotPass a{
+    color: #FFB61D;
+    text-decoration: none;
+}
+
+.email, .password, .nickname{
+    padding-left: 2rem;
+}
+
+.btnRegris p{
+    font-size: 20px;
+    color: #7D7D7D;
+}
+
+.btnRegris a{
+    color: #FFB61D;
+    text-decoration: none;
+}
+
+.login_right p{
+    font-size: 32px;
+    line-height: 40px;
+}
+
+.login_right span {
+    line-height: 80px;
+}
+
+.textPass p{
+    font-size: 10px;
+    line-height: 15px;
+    color: #ABABAB;
+    text-align: start;
+}
+
+
