@@ -37,6 +37,6 @@ Route::get('/record', function () {
 Route::get('/aboutUs', function () {
     return view('aboutUs');
 });
-Route::get('/dashboard', function () {
-    return view('/dashboard/dashboard');
-});
+// Route::get('/dashboard', function () {
+//     return view('/dashboard/dashboard');
+// });
