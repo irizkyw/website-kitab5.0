@@ -31,7 +31,13 @@
             <a class="nav-link" aria-current="page" href="#">Home</a>
             <a class="nav-link" aria-current="page"  href="#">Scripture</a>
             <a class="nav-link" aria-current="page" href="#">Contact</a>
+            <!-- check have session -->
+            @if (session()->has('access_token'))
+            <?php $buttonText = explode(' ', session()->get('user.name'))[0]; ?>
+            <a class="border buttonLgn btn btn-primary" style="color: #FFFFFF">{{ $buttonText }}</a>
+            @else
             <a class="border buttonLgn btn btn-primary" style="color: #FFFFFF" href="{{ url('/login') }}">Login</a>
+            @endif
           </div>
         </div>
       </div>

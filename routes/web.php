@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,23 +22,23 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'guest'], function () {
     Route::post('/authentication', function (Request $request) {
-        $authController = new AuthController();
-        $response = $authController->login($request);
-        $responseData = json_decode($response->getContent(), true);
-        if(isset($responseData['access_token'])) {
-            $accessToken = $responseData['access_token'];
-        } else {
-            $accessToken = null;
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            $token = $user->createToken('token-name')->plainTextToken;
+            session(['access_token' => $token]);
+            session(['user' => $user]);
+            return redirect()->route('landingPage');
         }
-        if ($accessToken !== null) {
-            session(['access_token' => $accessToken]);
-            return redirect('/loginPage')->with('error', 'Login gagal!');
-        } else {
-            return $response;
-        }
+
+        return redirect()->back()->withErrors(['email' => 'Invalid email or password.']);
     })->name('authentication');
 
     Route::post('/register', function (Request $request) {
+        if (session()->has('access_token')) {
+            return redirect('/landingPage')->with('success', 'Anda sudah login!');
+        }
         $authController = new AuthController();
         $response = $authController->register($request);
         $responseData = json_decode($response->getContent(), true);
@@ -49,6 +50,7 @@ Route::group(['middleware' => 'guest'], function () {
     })->name('register');
 
     Route::get('/landingPage', function () {
+        $token = session('access_token');
         return view('landingPage');
     })->name('landingPage');
     
@@ -61,9 +63,9 @@ Route::group(['middleware' => 'guest'], function () {
     
 });
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/logout', function () {
-        session()->forget('access_token');
-        return redirect()->url('/landingPage')->with('success', 'Logout berhasil!');
-    })->name('logout');
-});
+Route::get('/logout', function (Request $request) {
+    session()->forget('access_token');
+    session()->forget('user');
+
+    return redirect()->route('login')->with('success', 'Logout berhasil!');
+})->name('logout');
