@@ -32,7 +32,7 @@ php artisan jwt:secret
 ```<PHP>
 php artisan serve
 ```
-for another Issues for find the solution or documentation you can visit [here](https://github.com/irizkyw/website-kitab5.0/issues)
+For another Issues for find the solution or documentation you can visit [here](https://github.com/irizkyw/website-kitab5.0/issues)
 
 ### Thanks To
 <a href="https://github.com/irizkyw/website-kitab5.0/graphs/contributors">
