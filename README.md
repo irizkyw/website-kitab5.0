@@ -24,7 +24,7 @@ DB_PASSWORD=YOU DBMS PASSWORD
 
 JWT_SECRET= TOKEN
 ```
-- Setup the JWT Token
+- Generate key for JWT Token
 ```<PHP>
 php artisan jwt:secret
 ```
