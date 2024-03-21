@@ -13,7 +13,7 @@ class kitabs_seeders extends Seeder
      */
     public function run(): void
     {
-        DB::table('kitabs')->insert([[
+        DB::table('books')->insert([[
             'kitab' => "RegVeda",
             'agama' => "Hindu",
             'created_at' => now(),
