@@ -24,10 +24,14 @@ Route::group(['middleware' => 'guest'], function () {
         $authController = new AuthController();
         $response = $authController->login($request);
         $responseData = json_decode($response->getContent(), true);
-        $accessToken = $responseData['access_token'];
-        if ($accessToken) {
+        if(isset($responseData['access_token'])) {
+            $accessToken = $responseData['access_token'];
+        } else {
+            $accessToken = null;
+        }
+        if ($accessToken !== null) {
             session(['access_token' => $accessToken]);
-            return redirect()->url('/landingPage')->with('success', 'Login berhasil!');
+            return redirect('/loginPage')->with('error', 'Login gagal!');
         } else {
             return $response;
         }
@@ -50,7 +54,7 @@ Route::group(['middleware' => 'guest'], function () {
     
     Route::get('/loginPage', function () {
         if (session()->has('access_token')) {
-            return redirect('/landingPage')->with('success', 'Anda sudah login!'); // 'You are already logged in!
+            return redirect('/landingPage')->with('success', 'Anda sudah login!');
         }
         return view('loginPage');
     })->name('login');
