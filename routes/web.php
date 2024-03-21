@@ -19,8 +19,8 @@ Route::get('/', function () {
 Route::get('/landingPage', function () {
     return view('landingPage');
 });
-Route::get('/login', function () {
-    return view('login');
+Route::get('/loginPage', function () {
+    return view('loginPage');
 });
 Route::get('/signUp', function () {
     return view('signUp');
