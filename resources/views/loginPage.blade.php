@@ -68,7 +68,9 @@
                         </div>
                     </div>
                     <div class="googlePic d-flex justify-content-center my-2">
-                        <a href=""><img src="./images/google.png" alt=""></a>
+                        <a href="{{ url('api/google') }}">
+                            <img src="./images/google.png" alt="">
+                        </a>
                     </div>
                     <div class="btnRegris my-5">
                         <p>Become Member? <span><a href="{{ url('/signUp') }}">Register now</a></span></p>

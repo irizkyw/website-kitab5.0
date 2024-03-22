@@ -14,10 +14,6 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();  
-// });
-
 Route::group([
 
     'middleware' => 'api',
@@ -30,5 +26,4 @@ Route::group([
     Route::get('/logout', [AuthController::class , 'logout']);
     Route::get('/refresh', [AuthController::class , 'refresh']);
     Route::get('/me', [AuthController::class , 'me']);
-
 });
