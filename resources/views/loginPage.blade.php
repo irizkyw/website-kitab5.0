@@ -53,7 +53,7 @@
                             <div class="forgotPass text-end my-2 mx-4">
                                 <a href="{{ url('/changePass') }}">Forgot Password?</a>
                             </div>
-                            <button class="btn longBtn my-4" type="submit">Login</button>
+                            <button class="btn longBtn my-4 w-100" type="submit">Login</button>
                         </form>
                     </div>
                     <div class="row justify-content-center my-3">
