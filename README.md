@@ -30,6 +30,7 @@ php artisan serve
 ```
 For another Issues for find the solution or documentation you can visit [here](https://github.com/irizkyw/website-kitab5.0/issues)
 
+
 ### Developed by
 <a href="https://github.com/irizkyw/website-kitab5.0/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=irizkyw/website-kitab5.0" />
