@@ -3,10 +3,6 @@ Kitab Suci 5.0 app is an innovative solution that allows users to access sacred 
 
 ### API Usage
 - [Equran.id](https://equran.id/apidev/v2)
--
--
--
--
 
 ### Installation
 - Clone the repository
@@ -34,7 +30,7 @@ php artisan serve
 ```
 For another Issues for find the solution or documentation you can visit [here](https://github.com/irizkyw/website-kitab5.0/issues)
 
-### Thanks To
+### Developed by
 <a href="https://github.com/irizkyw/website-kitab5.0/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=irizkyw/website-kitab5.0" />
 </a>
