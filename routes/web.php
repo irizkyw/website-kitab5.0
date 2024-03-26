@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Http\Controllers\AyatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,3 +70,11 @@ Route::get('/logout', function (Request $request) {
 
     return redirect()->route('login')->with('success', 'Logout berhasil!');
 })->name('logout');
+
+Route::get('/ayats',AyatController::class .'@index')->name('Ayats/ayats');
+Route::post('/ayats/posts', AyatController::class .'@store')->name('ayats.store');
+Route::get('/ayats/posts/create', AyatController::class .'@create')->name('ayats.create');
+Route::get('/ayats/posts/{post}', AyatController::class .'@show')->name('ayats.show');
+Route::get('/ayats/posts/{post}/edit', AyatController::class .'@edit')->name('ayats.edit');
+Route::put('/ayats/posts/{post}', AyatController::class .'@update')->name('ayats.update');
+Route::delete('/ayats/posts/{post}', AyatController::class .'@destroy')->name('ayats.destroy');
