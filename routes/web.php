@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\AyatController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,45 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'guest'], function () {
+    Route::get('api/google', function () {
+        return Socialite::driver('google')->redirect();
+    });
+
+    Route::get('api/google/callback', function () {
+        try {
+            $user = Socialite::driver('google')->user();
+            $finduser = User::where('google_id', $user->id)->first();
+
+            if ($finduser) {
+                Auth::login($finduser);
+                $token = $finduser->createToken('access_token')->plainTextToken;
+                session(['access_token' => $token]);
+                session(['user' => $finduser]);
+                
+                return redirect('/landingPage');
+            } else {
+                $newUser = User::create([
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'google_id' => $user->id,
+                    'password' => Hash::make('password')
+                ]);
+
+                $newUser->google_id = $user->id;
+                $newUser->save();
+
+                $token = $newUser->createToken('access_token')->plainTextToken;
+                session(['access_token' => $token]);
+                session(['user' => $newUser]);
+
+                Auth::login($newUser);
+                return redirect('/landingPage');
+            }
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+    })->name('googleCallback');
+
     Route::post('/authentication', function (Request $request) {
         $credentials = $request->only('email', 'password');
 
@@ -67,6 +107,7 @@ Route::group(['middleware' => 'guest'], function () {
 Route::get('/logout', function (Request $request) {
     session()->forget('access_token');
     session()->forget('user');
+
 
     return redirect()->route('login')->with('success', 'Logout berhasil!');
 })->name('logout');

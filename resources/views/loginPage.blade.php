@@ -53,7 +53,7 @@
                             <div class="forgotPass text-end my-2 mx-4">
                                 <a href="{{ url('/changePass') }}">Forgot Password?</a>
                             </div>
-                            <button class="btn longBtn my-4" type="submit">Login</button>
+                            <button class="btn longBtn my-4 w-100" type="submit">Login</button>
                         </form>
                     </div>
                     <div class="row justify-content-center my-3">
@@ -68,7 +68,9 @@
                         </div>
                     </div>
                     <div class="googlePic d-flex justify-content-center my-2">
-                        <a href=""><img src="./images/google.png" alt=""></a>
+                        <a href="{{ url('api/google') }}">
+                            <img src="./images/google.png" alt="">
+                        </a>
                     </div>
                     <div class="btnRegris my-5">
                         <p>Become Member? <span><a href="{{ url('/signUp') }}">Register now</a></span></p>
