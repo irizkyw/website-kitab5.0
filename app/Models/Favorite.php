@@ -11,7 +11,7 @@ class Favorite extends Model
     protected $fillable = [
         "book_id",
         "user_id",
-        "favorite_ayat",
+        "chapter_id",
+        "ayat_id",
     ];
-
 }

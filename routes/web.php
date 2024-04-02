@@ -112,10 +112,22 @@ Route::get('/logout', function (Request $request) {
     return redirect()->route('login')->with('success', 'Logout berhasil!');
 })->name('logout');
 
-Route::get('/ayats',AyatController::class .'@index')->name('Ayats/ayats');
-Route::post('/ayats/posts', AyatController::class .'@store')->name('ayats.store');
-Route::get('/ayats/posts/create', AyatController::class .'@create')->name('ayats.create');
-Route::get('/ayats/posts/{post}', AyatController::class .'@show')->name('ayats.show');
-Route::get('/ayats/posts/{post}/edit', AyatController::class .'@edit')->name('ayats.edit');
-Route::put('/ayats/posts/{post}', AyatController::class .'@update')->name('ayats.update');
-Route::delete('/ayats/posts/{post}', AyatController::class .'@destroy')->name('ayats.destroy');
+Route::group(['prefix' => 'clients'], function () {
+    Route::get('/', [ClientController::class, 'index'])->name('client.index');
+    Route::get('/create', [ClientController::class, 'create'])->name('client.create');
+    Route::post('/store', [ClientController::class, 'store'])->name('client.store');
+    Route::get('/{id}/edit', [ClientController::class, 'edit'])->name('client.edit');
+    Route::put('/{id}/update', [ClientController::class, 'update'])->name('client.update');
+    Route::delete('/{id}/destroy', [ClientController::class, 'destroy'])->name('client.destroy');
+    Route::get('/{id}', [ClientController::class, 'show'])->name('client.show');
+});
+
+Route::group(['prefix' => 'admins'], function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/create', [AdminController::class, 'create'])->name('admin.create');
+    Route::post('/store', [AdminController::class, 'store'])->name('admin.store');
+    Route::get('/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
+    Route::put('/{id}/update', [AdminController::class, 'update'])->name('admin.update');
+    Route::delete('/{id}/destroy', [AdminController::class, 'destroy'])->name('admin.destroy');
+    Route::get('/{id}', [AdminController::class, 'show'])->name('admin.show');
+});
