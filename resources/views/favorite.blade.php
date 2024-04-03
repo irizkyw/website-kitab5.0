@@ -1,83 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Favorite</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-
-    <!-- Boostrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    @extends('master')
     
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ asset('./style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <!-- Styles -->
-    <style>
-    </style>
-</head>
-<body>
-    <section class="header">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
-            <div class="container">
-            <a class="navbar-brand" href="{{ url('/landingPage') }}">Kitab<span style="color: #33D8D8; font-weight:600">Suci</span></a>
-            <div class="collapse navbar-collapse navText" id="navbarNavAltMarkup">
-                <div class="navbar-nav ms-auto login justify-content-end">
-                    <div class="menu d-flex mx-5">
-                        <a class="nav-link" id="home-link" href="{{ url('/landingPage') }}">Home</a>
-                        <a class="nav-link" id="scripture-link" href="{{ url('/scripture') }}">Scripture</a>
-                        <a class="nav-link active" id="favorite-link" href="{{ url('/favorite') }}">Favorite</a>
-                        <a class="nav-link" id="contact-link" href="{{ url('/contact') }}">Contact</a>
-                    </div>
-                    <input class="form-control search w-25" type="text" name="search" id="search" placeholder="Search">
-                    <a class="border buttonLgn btn btn-primary mx-3" style="color: #FFFFFF" href="{{ url('/login') }}" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Login</a>
-                </div>
-            </div>
-            </div>
-        </nav> 
-    </section>  
+    <!-- SIDEBAR -->
+    @include('layout.includes._sidebar')
+    <!-- END SIDEBAR -->
 
-    <section class="sidebar">  
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header">
-            <h2 class="offcanvas-title" id="offcanvasRightLabel">Account Setting</h2>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <form>
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Masukkan nama" value="Velman Harefa" readonly>
-                </div>
-                <div class="mb-3">
-                    <label for="name" class="form-label">Nickname</label>
-                    <input type="text" class="form-control" id="name" placeholder="Masukkan nama" value="Velman" readonly>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Masukkan email" value="velmanh24@gmail.com" readonly>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Masukkan password" value="velmanharefa" readonly>
-                </div>
-                <div class="row justify-content-center">
-                    <button type="submit" class="btn btn-primary buttonLgn" id="saveBtn" style="display: none;">Simpan</button>
-                </div>
-            </form>
-            <div class="row justify-content-center">
-                <button class="btn btn-secondary buttonLgn justify-content-center" id="editBtn">Edit</button>
-                <button class="btn btn-secondary buttonLgn justify-content-center mx-2" style="background-color: #FF204E;" id="logoutBtn">Logout</button>
-            </div>
-        </div>
-    </section>
-
-    <section class="content">
+    @section('content')
         <div class="container">
             <div class="row landPage my-3">
                 <div class="col-sm-3 d-flex flex-column justify-content-center">
@@ -233,17 +160,4 @@
                 </div>
             </div>
         </div>
-    </section>
-
-
-    <section class="footer">
-        <div class="footer-content border-top">
-            <p style="text-align: center">&copy; Copyright KitabSuci. Made by Kelompok 7 ABP</p>
-        </div>
-    </section>
-
-    <script src="./main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    
-</body>
-</html>
+@stop

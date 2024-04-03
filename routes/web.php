@@ -18,7 +18,7 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landingPage');
 });
 
 Route::group(['middleware' => 'guest'], function () {
@@ -111,9 +111,6 @@ Route::get('/logout', function (Request $request) {
     return redirect()->route('login')->with('success', 'Logout berhasil!');
 })->name('logout');
 
-Route::get('/landingPage', function () {
-    return view('landingPage');
-});
 Route::get('/login', function () {
     return view('login');
 });
