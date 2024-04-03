@@ -37,22 +37,25 @@
                         <span2>Jangan lupakan ibadah dengan membaca kitab</span>
                     </p>
                     <div class="textfield">
-                        <span class="input-Email">
-                            <input class="form-control email my-3" type="text" name="Email" id="Email" placeholder="Email/username">
-                        </span>
+                        <form action="{{ url('/authentication') }}" method="POST">
+                            @csrf
+                            <span class="input-Email">
+                                <input class="form-control email my-3" type="text" name="email" id="Email" placeholder="Email/username">
+                            </span>
 
-                        <span class="input-group">
-                            <input class="form-control password" type="password" name="Email" id="Email" placeholder="Password">
-                            {{-- <input class="form-control password" type="text" name="Email" id="Email" placeholder="Password">
-                            <button1 class="btn btn-outline-secondary" type="button" id="toggleButton" onclick="togglePasswordVisibility()">
-                                <i id="toggleIcon" class="fas fa-eye"></i>
-                            </button> --}}
-                        </span>
+                            <span class="input-group">
+                                <input class="form-control password" type="password" name="password" id="Password" placeholder="Password">
+                                {{-- <input class="form-control password" type="text" name="email" id="Email" placeholder="Password">
+                                <button1 class="btn btn-outline-secondary" type="button" id="toggleButton" onclick="togglePasswordVisibility()">
+                                    <i id="toggleIcon" class="fas fa-eye"></i>
+                                </button> --}}
+                            </span>
+                            <div class="forgotPass text-end my-2 mx-4">
+                                <a href="{{ url('/changePass') }}">Forgot Password?</a>
+                            </div>
+                            <button class="btn longBtn my-4 w-100" type="submit">Login</button>
+                        </form>
                     </div>
-                    <div class="forgotPass text-end my-2 mx-4">
-                        <a href="{{ url('/changePass') }}">Forgot Password?</a>
-                    </div>
-                    <a class="btn longBtn my-4" data-bs-target="#" data-bs-toggle="modal" type="submit">Login</a>
                     <div class="row justify-content-center my-3">
                         <div class="col-5">
                             <hr>
@@ -65,7 +68,9 @@
                         </div>
                     </div>
                     <div class="googlePic d-flex justify-content-center my-2">
-                        <a href=""><img src="./images/google.png" alt=""></a>
+                        <a href="{{ url('api/google') }}">
+                            <img src="./images/google.png" alt="">
+                        </a>
                     </div>
                     <div class="btnRegris my-5">
                         <p>Become Member? <span><a href="{{ url('/signUp') }}">Register now</a></span></p>

@@ -22,7 +22,6 @@
     </style>
 </head>
 <body>
-
   <section class="header">
     <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
         <div class="container">

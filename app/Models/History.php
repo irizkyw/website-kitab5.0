@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kitab extends Model
+class History extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'kitab',
-        'agama',
+        "user_id",
+        "book_id",
+        "history_ayat",
     ];
 }
