@@ -110,3 +110,28 @@ Route::get('/logout', function (Request $request) {
 
     return redirect()->route('login')->with('success', 'Logout berhasil!');
 })->name('logout');
+
+Route::get('/landingPage', function () {
+    return view('landingPage');
+});
+Route::get('/login', function () {
+    return view('login');
+});
+Route::get('/signUp', function () {
+    return view('signUp');
+});
+Route::get('/changePass', function () {
+    return view('changePass');
+});
+Route::get('/kitab', function () {
+    return view('kitab');
+});
+Route::get('/scripture', function () {
+    return view('scripture');
+});
+Route::get('/favorite', function () {
+    return view('favorite');
+});
+Route::get('/contact', function () {
+    return view('contact');
+});
