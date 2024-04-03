@@ -19,8 +19,8 @@ Route::get('/', function () {
 Route::get('/landingPage', function () {
     return view('landingPage');
 });
-Route::get('/loginPage', function () {
-    return view('loginPage');
+Route::get('/login', function () {
+    return view('login');
 });
 Route::get('/signUp', function () {
     return view('signUp');
@@ -28,15 +28,15 @@ Route::get('/signUp', function () {
 Route::get('/changePass', function () {
     return view('changePass');
 });
+Route::get('/kitab', function () {
+    return view('kitab');
+});
 Route::get('/scripture', function () {
     return view('scripture');
 });
-Route::get('/record', function () {
-    return view('record');
+Route::get('/favorite', function () {
+    return view('favorite');
 });
-Route::get('/aboutUs', function () {
-    return view('aboutUs');
+Route::get('/contact', function () {
+    return view('contact');
 });
-// Route::get('/dashboard', function () {
-//     return view('/dashboard/dashboard');
-// });

@@ -25,17 +25,21 @@
 
   <section class="header">
     <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
-      <div class="container">
-        <a1 class="navbar-brand" href="{{ url('/landingPage') }}">KitabSuci</a1>
+        <div class="container">
+        <a class="navbar-brand" href="{{ url('/landingPage') }}">Kitab<span style="color: #33D8D8; font-weight:600">Suci</span></a>
         <div class="collapse navbar-collapse navText" id="navbarNavAltMarkup">
-          <div class="navbar-nav ms-auto  login">
-            <a class="nav-link" aria-current="page" href="#">Home</a>
-            <a class="nav-link" aria-current="page"  href="#">Scripture</a>
-            <a class="nav-link" aria-current="page" href="#">Contact</a>
-            <a class="border buttonLgn btn btn-primary" style="color: #FFFFFF" href="{{ url('/login') }}">Login</a>
-          </div>
+            <div class="navbar-nav ms-auto login justify-content-end">
+                <div class="menu d-flex mx-5">
+                  <a class="nav-link active" id="home-link" href="{{ url('/landingPage') }}">Home</a>
+                  <a class="nav-link" id="scripture-link" href="{{ url('/scripture') }}">Scripture</a>
+                  <a class="nav-link" id="favorite-link" href="{{ url('/favorite') }}">Favorite</a>
+                  <a class="nav-link" id="contact-link" href="{{ url('/contact') }}">Contact</a>
+                </div>
+                <input class="form-control search w-25" type="text" name="search" id="search" placeholder="Search">
+                <a class="border buttonLgn btn btn-primary mx-3" style="color: #FFFFFF" href="{{ url('/login') }}">Login</a>
+            </div>
         </div>
-      </div>
+        </div>
     </nav> 
   </section>  
 
@@ -51,9 +55,7 @@
             <div class="landPict ">
               <img src="./images/googleplay.png" alt="">
             </div>
-          <!-- <div class="landPict">
-            <img src="./images/kemenag.png" alt="">
-          </div> -->
+      
         </div>
         <div class="col-sm-6 d-flex ms-auto justify-content-end p-0">
           <img src="./images/landingpage1.png" alt="">
@@ -69,12 +71,12 @@
           </div>
           <div class="col-sm-4">
             <p>Aplikasi Agama <br>
-              <span>Terlengkap</span>
+              <span>Terpercaya</span>
             </p>  
           </div>
           <div class="col-sm-4">
             <p>Aplikasi Agama <br>
-              <span>Terlengkap</span>
+              <span>Terpraktis</span>
             </p>
           </div>
         </div>
@@ -82,6 +84,7 @@
     </div>
   </section>
 
+  <script src="./main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
