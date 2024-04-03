@@ -10,7 +10,7 @@
                   <a class="nav-link" id="favorite-link" href="{{ url('/favorite') }}">Favorite</a>
                   <a class="nav-link" id="contact-link" href="{{ url('/contact') }}">Contact</a>
                 </div>
-                <input class="form-control search w-25" type="text" name="search" id="search" placeholder="Search">
+                <input class="form-control search w-25 mx-2" type="text" name="search" id="search" placeholder="Search">
                 @if (session()->has('access_token'))
                 <?php $buttonText = explode(' ', session()->get('user.name'))[0]; ?>
                 <a class="border buttonLgn btn btn-primary" style="color: #FFFFFF">{{ $buttonText }}</a>

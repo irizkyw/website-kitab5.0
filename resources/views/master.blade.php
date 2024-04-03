@@ -22,10 +22,14 @@
     @include('layout.includes._navbar')
   <!-- END HEADER -->
 
-  <section class="content">
+  <section class="content" style="margin-bottom: 5em;">
     @yield('content')
   </section>
-
+  @if (session()->has('access_token'))
+    <!-- SIDEBAR -->
+        @include('layout.includes._sidebar')
+    <!-- END SIDEBAR -->
+  @endif
   <section class="footer">
         <div class="footer-content border-top">
             <p style="text-align: center">&copy; Copyright KitabSuci. Made by Kelompok 7 ABP</p>

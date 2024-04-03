@@ -1,9 +1,4 @@
     @extends('master')
-    
-    <!-- SIDEBAR -->
-    @include('layout.includes._sidebar')
-    <!-- END SIDEBAR -->
-
     @section('content')
         <div class="container">
             <div class="row landPage my-3">

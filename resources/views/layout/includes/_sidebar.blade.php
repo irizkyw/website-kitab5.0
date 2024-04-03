@@ -8,19 +8,15 @@
             <form>
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Masukkan nama" value="Velman Harefa" readonly>
-                </div>
-                <div class="mb-3">
-                    <label for="name" class="form-label">Nickname</label>
-                    <input type="text" class="form-control" id="name" placeholder="Masukkan nama" value="Velman" readonly>
+                    <input type="text" class="form-control" id="name" placeholder="Masukkan nama" value="{{session()->get('user.name')}}" readonly>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Masukkan email" value="velmanh24@gmail.com" readonly>
+                    <input type="email" class="form-control" id="email" placeholder="Masukkan email" value="{{session()->get('user.email')}}" readonly>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Masukkan password" value="velmanharefa" readonly>
+                    <input type="password" class="form-control" id="password" placeholder="Masukkan password" value="{{session()->get('user.password')}}" readonly>
                 </div>
                 <div class="row justify-content-center">
                     <button type="submit" class="btn btn-primary buttonLgn" id="saveBtn" style="display: none;">Simpan</button>
