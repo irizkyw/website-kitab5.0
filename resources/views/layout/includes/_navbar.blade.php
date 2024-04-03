@@ -11,7 +11,12 @@
                   <a class="nav-link" id="contact-link" href="{{ url('/contact') }}">Contact</a>
                 </div>
                 <input class="form-control search w-25" type="text" name="search" id="search" placeholder="Search">
-                <a class="border buttonLgn btn btn-primary mx-3" style="color: #FFFFFF" href="{{ url('/login') }}">Login</a>
+                @if (session()->has('access_token'))
+                <?php $buttonText = explode(' ', session()->get('user.name'))[0]; ?>
+                <a class="border buttonLgn btn btn-primary" style="color: #FFFFFF">{{ $buttonText }}</a>
+                @else
+                <a class="border buttonLgn btn btn-primary" style="color: #FFFFFF" href="{{ url('/login') }}">Login</a>
+                @endif
             </div>
         </div>
         </div>
