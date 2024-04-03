@@ -108,7 +108,7 @@ Route::get('/logout', function (Request $request) {
     session()->forget('user');
 
 
-    return redirect()->route('login')->with('success', 'Logout berhasil!');
+    return redirect('/login')->with('success', 'Anda berhasil logout!');
 })->name('logout');
 
 Route::get('/login', function () {
