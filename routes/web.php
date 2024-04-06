@@ -19,7 +19,7 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landingPage');
 });
 
 Route::group(['middleware' => 'guest'], function () {
@@ -58,7 +58,7 @@ Route::group(['middleware' => 'guest'], function () {
                 return redirect('/landingPage');
             }
         } catch (\Throwable $th) {
-            dd($th);
+            return redirect('/login')->with('error', 'Login gagal!');
         }
     })->name('googleCallback');
 
@@ -84,7 +84,7 @@ Route::group(['middleware' => 'guest'], function () {
         $response = $authController->register($request);
         $responseData = json_decode($response->getContent(), true);
         if ($responseData['message'] === 'Pendaftaran berhasil') {
-            return redirect('/loginPage')->with('success', 'Registrasi berhasil!');
+            return redirect('/login')->with('success', 'Registrasi berhasil!');
         } else {
             return $response;
         }
@@ -95,7 +95,7 @@ Route::group(['middleware' => 'guest'], function () {
         return view('landingPage');
     })->name('landingPage');
     
-    Route::get('/loginPage', function () {
+    Route::get('/login', function () {
         if (session()->has('access_token')) {
             return redirect('/landingPage')->with('success', 'Anda sudah login!');
         }
@@ -107,9 +107,7 @@ Route::group(['middleware' => 'guest'], function () {
 Route::get('/logout', function (Request $request) {
     session()->forget('access_token');
     session()->forget('user');
-
-
-    return redirect()->route('login')->with('success', 'Logout berhasil!');
+    return redirect('/login')->with('success', 'Anda berhasil logout!');
 })->name('logout');
 
 Route::get('/login', function () {
