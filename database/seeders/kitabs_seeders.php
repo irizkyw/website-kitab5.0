@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class kitabs_seeders extends Seeder
 {
@@ -52,8 +53,15 @@ class kitabs_seeders extends Seeder
         DB::table('users')->insert([[
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
-            'password' => 'admin123',
+            'password' => Hash::make('admin123'),
             'userType' => 'admin',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ],[
+            'name' => 'client',
+            'email' => 'client@gmail.com',
+            'password' => Hash::make('client123'),
+            'userType' => 'client',
             'created_at' => now(),
             'updated_at' => now(),
         ]]);

@@ -67,6 +67,12 @@ Route::group(['middleware' => 'guest'], function () {
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
+
+            if ($user->disable == 1) {
+                dd('account disable');
+                return redirect()->back()->withErrors(['error' => 'Your account has been disabled.']);
+            }
+    
             $token = $user->createToken('token-name')->plainTextToken;
             session(['access_token' => $token]);
             session(['user' => $user]);
@@ -101,7 +107,6 @@ Route::group(['middleware' => 'guest'], function () {
         }
         return view('loginPage');
     })->name('login');
-    
 });
 
 Route::get('/logout', function (Request $request) {

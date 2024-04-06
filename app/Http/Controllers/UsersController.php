@@ -74,12 +74,12 @@ class UsersController extends Controller
         $user = auth()->user();
 
         if ($user->userType === 'admin') {
-            $userToDelete = User::find($id);
-            if (!$userToDelete) {
+            $disableUser = User::find($id);
+            if (!$disableUser) {
                 return redirect()->route('users.index')->with('error', 'User not found');
             }
-            $userToDelete->delete();
-            return redirect()->route('users.index')->with('success', 'User deleted successfully');
+            $disableUser->update(['disable'=>1]);
+            return redirect()->route('users.index')->with('success', 'User disabled successfully');
         } elseif ($user->userType === 'client') {
             $user->delete();
             return redirect()->route('/')->with('success', 'Your account has been deleted successfully');
