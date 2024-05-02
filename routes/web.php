@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Http\Controllers\AyatController;
 use App\Models\User;
 
 /*
@@ -66,6 +67,12 @@ Route::group(['middleware' => 'guest'], function () {
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
+
+            if ($user->disable == 1) {
+                dd('account disable');
+                return redirect()->back()->withErrors(['error' => 'Your account has been disabled.']);
+            }
+    
             $token = $user->createToken('token-name')->plainTextToken;
             session(['access_token' => $token]);
             session(['user' => $user]);
@@ -100,14 +107,11 @@ Route::group(['middleware' => 'guest'], function () {
         }
         return view('loginPage');
     })->name('login');
-    
 });
 
 Route::get('/logout', function (Request $request) {
     session()->forget('access_token');
     session()->forget('user');
-
-
     return redirect('/login')->with('success', 'Anda berhasil logout!');
 })->name('logout');
 
@@ -264,4 +268,28 @@ Route::get('/search', function (Request $request) {
     } else {
         return response()->json(['error' => 'Gagal mengambil data chapter.'], $response->status());
     }
+});
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::group(['prefix' => 'client'], function () {
+        Route::get('/', [ClientController::class, 'index'])->name('client.index');
+        Route::get('/create', [ClientController::class, 'create'])->name('client.create');
+        Route::post('/store', [ClientController::class, 'store'])->name('client.store');
+        Route::get('/{id}/edit', [ClientController::class, 'edit'])->name('client.edit');
+        Route::put('/{id}/update', [ClientController::class, 'update'])->name('client.update');
+        Route::delete('/{id}/destroy', [ClientController::class, 'destroy'])->name('client.destroy');
+        Route::get('/{id}', [ClientController::class, 'show'])->name('client.show');
+    });
+    
+    Route::group(['prefix' => 'admin'], function () {
+        Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+        Route::get('/create', [AdminController::class, 'create'])->name('admin.create');
+        Route::post('/store', [AdminController::class, 'store'])->name('admin.store');
+        Route::get('/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
+        Route::put('/{id}/update', [AdminController::class, 'update'])->name('admin.update');
+        Route::delete('/{id}/destroy', [AdminController::class, 'destroy'])->name('admin.destroy');
+        Route::get('/{id}', [AdminController::class, 'show'])->name('admin.show');
+    });
+
 });

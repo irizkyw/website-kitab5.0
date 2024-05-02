@@ -59,6 +59,12 @@ class AuthController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
+        $user= auth()->user();
+        if ($user->disable == 1){
+            return redirect()->back()->withErrors(['error' => 'Your account has been disabled.']);
+            //return response()->json(['error' => 'Your account has been disabled'], 401);
+        }
+        
         return $this->respondWithToken($token);
     }
 
