@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UsersController extends Controller
 {
@@ -12,7 +13,7 @@ class UsersController extends Controller
     
     public function index()
     {
-        $users = users::all();
+        $users = User::all();
         return view('users.index', compact('users'));
     }
  
@@ -23,7 +24,7 @@ class UsersController extends Controller
  
     public function edit($id)
     {
-        $user = users::find($id);
+        $user = User::find($id);
         return view('users.edit', compact('users'));
     }
 
@@ -32,7 +33,7 @@ class UsersController extends Controller
      */
     public function show(string $id)
     {
-        $user = users::find($id);
+        $user = User::find($id);
         if($user->userType === 'admin'){
             return view('users.show', compact('users'));
         } else{
