@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('google_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('userType')->default('client');
+            $table->boolean('disable')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

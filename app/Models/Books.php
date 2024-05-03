@@ -9,7 +9,9 @@ class Books extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'kitab',
+        "books_id",
+        'books',
         'agama',
+        "API_Gateaway",
     ];
 }

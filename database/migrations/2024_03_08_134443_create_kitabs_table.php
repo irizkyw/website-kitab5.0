@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->string('kitab')->nullable();
+            $table->string('books')->nullable();
             $table->string('agama')->nullable();
+            $table->string('API_Gateaway')->nullable();
             $table->timestamps();
         });
     }
