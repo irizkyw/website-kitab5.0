@@ -9,7 +9,7 @@
                 <div class="col-sm-6 p-2">
                     @foreach ($books as $scripture)
                     <div class="row my-2 ">
-                        <a href="{{ route('scripture.detail', ['book' => $scripture->books, 'chapter' => 1]) }}" class="col-sm-12 p-0">
+                        <a href="{{ route('scripture.detail', ['kitab' => $scripture->books]) }}" class="col-sm-12 p-0">
                             <div class="col-sm-12 my-1 d-flex justify-content-center border" style="border-radius:10px; height: 7rem; background-color:#222831; color:#FFFFFF;">
                                 <div class=" d-flex flex-column justify-content-center align-items-center" style="text-align: center;">
                                     <h1 class="m-0" style="font-size: 38px; text-align:center">{{ $scripture->agama }}</h1>

@@ -132,7 +132,7 @@ Route::get('/contact', function () {
 });
 
 Route::get('/scripture', [BooksController::class, 'index']);
-Route::get('/scripture/{book}', [BooksController::class, 'detail_scripture'])->name('scripture.detail');
+Route::get('/scripture/{kitab}', [BooksController::class, 'detail_scripture'])->name('scripture.detail');
 
 Route::get('/search', function (Request $request) {
     $books = [
