@@ -36,10 +36,9 @@ class BooksController extends Controller
                 if (empty($chapter)){
                     $chapter = 1;
                 }
+                $list_chapters = $this->format_list_chapter_AlQuran($book);
+                $data_chapter = $this->format_DetailChapter_AlQuran($chapter);
                 if ($request->is('api/*')) {
-                    $list_chapters = $this->format_list_chapter_AlQuran($book);
-                    $data_chapter = $this->format_DetailChapter_AlQuran($chapter);
-
                     return response()->json([
                         'religion' => $books->first()->agama,
                         'books' => $books,
@@ -47,8 +46,6 @@ class BooksController extends Controller
                         'data_chapter' => $data_chapter,
                     ]);
                 }
-                $list_chapters = $this->format_list_chapter_AlQuran($book);
-                $data_chapter = $this->format_DetailChapter_AlQuran($chapter);
             }
             // End Islam
 
@@ -60,10 +57,10 @@ class BooksController extends Controller
                     $chapter = $book_chapters . '.1';
                 }
 
+                $list_books = $this->format_list_books_bible($book);
+                $list_chapters = $this->format_list_chapters_bible($book);
+                $data_chapter = $this->format_DetailChapter_bible($book, $chapter);
                 if ($request->is('api/*')) {
-                    $list_books = $this->format_list_books_bible($book);
-                    $list_chapters = $this->format_list_chapters_bible($book);
-                    $data_chapter = $this->format_DetailChapter_bible($book, $chapter);
                     return response()->json([
                         'religion' => $books->first()->agama,
                         'books' => $books,
@@ -71,11 +68,6 @@ class BooksController extends Controller
                         'data_chapter' => $data_chapter,
                     ]);
                 }
-
-                $list_books = $this->format_list_books_bible($book);
-                $list_chapters = $this->format_list_chapters_bible($book,$book_chapters);
-                
-                $data_chapter = $this->format_DetailChapter_bible($book, $chapter);
             }
             // END KRISTEN
         // END GET LIST CHAPTER
