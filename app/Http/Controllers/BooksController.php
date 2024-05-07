@@ -58,7 +58,7 @@ class BooksController extends Controller
                 }
 
                 $list_books = $this->format_list_books_bible($book);
-                $list_chapters = $this->format_list_chapters_bible($book);
+                $list_chapters = $this->format_list_chapters_bible($book, $book_chapters);
                 $data_chapter = $this->format_DetailChapter_bible($book, $chapter);
                 if ($request->is('api/*')) {
                     return response()->json([
@@ -82,7 +82,7 @@ class BooksController extends Controller
         if (isset($data['data_chapter']['error'])) {
             return response()->json($data['data_chapter'], 404);
         }
-
+        dd($data);
         return view('kitab', compact('data'));
     }
     /**
@@ -155,6 +155,7 @@ class BooksController extends Controller
             return response()->json(['error' => 'API Gateaway tidak ditemukan.'], 404);
         }
         $response = Http::get($API . '/surat/' . $chapter);
+        $format_chapter = [];
         if($response->successful()){
             $chapter = $response->json();
             $format_chapter = [
