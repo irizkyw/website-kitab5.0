@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('books')->nullable();
             $table->string('agama')->nullable();
             $table->string('API_Gateaway')->nullable();
+            $table->string('api_key')->nullable();
             $table->timestamps();
         });
     }

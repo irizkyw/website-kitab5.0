@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use App\Http\Controllers\AyatController;
+use App\Http\Controllers\BooksController;
 use App\Models\User;
 
 /*
@@ -124,12 +124,6 @@ Route::get('/signUp', function () {
 Route::get('/changePass', function () {
     return view('changePass');
 });
-Route::get('/kitab', function () {
-    return view('kitab');
-});
-Route::get('/scripture', function () {
-    return view('scripture');
-});
 Route::get('/favorite', function () {
     return view('favorite');
 });
@@ -137,68 +131,8 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
-Route::get('/books/{book}', function (Request $request, $book) {
-    $books = [
-        [
-            'id' => 1,
-            'name' => 'al-quran',
-            'api' => 'https://equran.id/api/v2/surat'
-        ],
-        [
-            'id' => 2,
-            'name' => 'bhagavad-gita',
-            'api' => 'https://bhagavadgitaapi.in/chapters'
-        ]
-    ];
-
-    $bookIndex = array_search($book, array_column($books, 'name'));
-
-    if ($bookIndex === false) {
-        return response()->json(['error' => 'Buku tidak ditemukan.'], 404);
-    }
-    
-    if ($request->has('chapter')) {
-        $chapter = $request->query('chapter');
-        $apiUrl = $books[$bookIndex]['api'] . "/$chapter";
-        
-        $response = Http::get($apiUrl);
-
-        if ($response->successful()) {
-            $chapter = $response->json();
-
-            $format_chapter = [
-                'chapter_id' => $chapter['data']['nomor'],
-                'chapter_name' => $chapter['data']['nama'],
-                'translation' => $chapter['data']['arti'],
-                'verses' => $chapter['data']['ayat'],
-                'description' => $chapter['data']['deskripsi'],
-            ];
-
-            return response()->json($format_chapter);
-        } else {
-            // coba get dari database
-            return response()->json(['error' => 'Gagal mengambil data chapter.'], $response->status());
-        }
-    } else {
-        $response = Http::get($books[$bookIndex]['api']);
-        if ($response->successful()) {
-            $chapters = $response->json();
-
-            $format_chapters = [];
-            foreach ($chapters['data'] as $chapter) {
-                $format_chapters[] = [
-                    'id' => $chapter['nomor'],
-                    'nama_latin' => $chapter['namaLatin']
-                ];
-            }
-
-            return response()->json($format_chapters);
-        } else {
-            return response()->json(['error' => 'Gagal mengambil data chapter.'], $response->status());
-        }
-    }
-});
-
+Route::get('/scripture', [BooksController::class, 'index']);
+Route::get('/scripture/{kitab}', [BooksController::class, 'detail_scripture'])->name('scripture.detail');
 
 Route::get('/search', function (Request $request) {
     $books = [

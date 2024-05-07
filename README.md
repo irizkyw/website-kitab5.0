@@ -3,6 +3,8 @@ Kitab Suci 5.0 app is an innovative solution that allows users to access sacred 
 
 ### API Usage
 - [Equran.id](https://equran.id/apidev/v2)
+- [Bible](https://api.scripture.api.bible/)
+- [Bhagavad Gita](https://bhagavadgitaapi.in/).
 
 ### Installation
 - Clone the repository

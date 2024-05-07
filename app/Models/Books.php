@@ -13,5 +13,6 @@ class Books extends Model
         'books',
         'agama',
         "API_Gateaway",
+        "api_key"
     ];
 }
