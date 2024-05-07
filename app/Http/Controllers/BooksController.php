@@ -14,6 +14,9 @@ class BooksController extends Controller
     public function index()
     {
         $books = Books::all();
+        if (request()->is('api/*')) {
+            return response()->json($books);
+        }
         return view('scripture',compact('books'));
     }
 
@@ -58,7 +61,7 @@ class BooksController extends Controller
                 }
 
                 $list_books = $this->format_list_books_bible($book);
-                $list_chapters = $this->format_list_chapters_bible($book);
+                $list_chapters = $this->format_list_chapters_bible($book,$book_chapters);
                 $data_chapter = $this->format_DetailChapter_bible($book, $chapter);
                 if ($request->is('api/*')) {
                     return response()->json([

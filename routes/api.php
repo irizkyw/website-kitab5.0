@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BooksController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,4 +27,16 @@ Route::group([
     Route::get('/logout', [AuthController::class , 'logout']);
     Route::get('/refresh', [AuthController::class , 'refresh']);
     Route::get('/me', [AuthController::class , 'me']);
+
+
+    
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'v1'
+
+], function ($router) {
+    Route::get('/scripture', [BooksController::class, 'index']);
+    Route::get('/scripture/{kitab}', [BooksController::class, 'detail_scripture'])->name('scripture.detail');
 });
