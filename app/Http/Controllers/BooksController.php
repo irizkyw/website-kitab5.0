@@ -85,7 +85,6 @@ class BooksController extends Controller
         if (isset($data['data_chapter']['error'])) {
             return response()->json($data['data_chapter'], 404);
         }
-        dd($data);
         return view('kitab', compact('data'));
     }
     /**
