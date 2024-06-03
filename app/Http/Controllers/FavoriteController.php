@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Favorite;
 use App\Models\Books;
 use Illuminate\Support\Facades\Http;
+use App\Models\User;
 
 class FavoriteController extends Controller
 {
@@ -14,19 +15,50 @@ class FavoriteController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            "book_id" => "required",
-            "user_id" => "required",
-            "pasal" => "required",
-            "chapter" => "required",
-            "ayat" => "required",
-        ]);
-        $favorite = Favorite::create($request->all());
-        //return redirect()->route('favorites.index')->with('success', 'Favorite created successfully.');
-        dd($favorite);
-        return response()->json($favorite, 201);
+{
+    if (!$request->from) {
+        return response()->json(['message' => 'User not found'], 404);
     }
+    $user = User::find($request->from);
+    if (!$user) {
+        return response()->json(['message' => 'User not found'], 404);
+    }
+
+    $book = Books::where('agama', $request->religion)->first();
+    if (!$book) {
+        return response()->json(['message' => 'Book not found'], 404);
+    }
+
+    $data = [
+        'book_id' => $book->id,
+        'user_id' => $request->from,
+        'pasal' => isset($request->pasal) ? $request->pasal : null,
+        'chapter' => $request->chapter,
+        'ayat' => $request->verse,
+    ];
+
+    $favorite = Favorite::where('book_id', $data['book_id'])
+                        ->where('user_id', $data['user_id'])
+                        ->where('pasal', $data['pasal'])
+                        ->where('chapter', $data['chapter'])
+                        ->where('ayat', $data['ayat'])
+                        ->first();
+
+    if ($favorite) {
+        $favorite->delete();
+        $message = 'Favorite removed successfully.';
+    } else {
+        $favorite = Favorite::create($data);
+        $message = 'Favorite created successfully.';
+    }
+
+    if ($request->is('api/*')) {
+        return response()->json(['message' => $message, 'favorite' => $favorite], 201);
+    }
+
+    return redirect()->route('favorite.showByUser', ['user_id' => $request->from])->with('success', $message);
+}
+
 
     //show favorite by id
     public function show(string $id)
@@ -92,6 +124,7 @@ class FavoriteController extends Controller
      */
     public function destroy(string $id)
     {
+        dd($id);
         $favorite = Favorite::find($id);
         $favorite->delete();
 

@@ -46,6 +46,6 @@ Route::group([
     Route::post('/favorite/post', FavoriteController::class.'@store')-> name('favorite.store');
     Route::get('/favorite/show/{user_id}', FavoriteController::class.'@showByUser')-> name('favorite.showByUser');
     Route::get('/favorite/{favorite_id}/details', FavoriteController::class.'@show')->name('favorite.show');
-    Route::delete('/favorite/delete/{id}', FavoriteController::class.'@destroy')-> name('favorite.destroy');
+    Route::delete('/favorite/delete', FavoriteController::class.'@destroy')-> name('favorite.destroy');
 });
 
