@@ -20,6 +20,15 @@ class BooksController extends Controller
         return view('scripture',compact('books'));
     }
 
+    public function book()
+    {
+        $books = Books::all();
+        if (request()->is('api/*')) {
+            return response()->json($books);
+        }
+        return view('layout/app_adminkit',compact('books'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

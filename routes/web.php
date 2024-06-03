@@ -17,6 +17,10 @@ use App\Models\User;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// Route::get('/dashboard', function () {
+//     return view('layout/app_adminkit');
+// });
+Route::get('/dashboard', [BooksController::class, 'book'])->name('dashboard');
 
 Route::get('/', function () {
     return view('landingPage');
@@ -37,7 +41,9 @@ Route::group(['middleware' => 'guest'], function () {
                 $token = $finduser->createToken('access_token')->plainTextToken;
                 session(['access_token' => $token]);
                 session(['user' => $finduser]);
-                
+                if ($finduser->userType == 'admin') {
+                    return redirect()->route('dashboard');
+                }
                 return redirect('/landingPage');
             } else {
                 $newUser = User::create([
@@ -55,9 +61,11 @@ Route::group(['middleware' => 'guest'], function () {
                 session(['user' => $newUser]);
 
                 Auth::login($newUser);
+                
                 return redirect('/landingPage');
             }
         } catch (\Throwable $th) {
+            
             return redirect('/login')->with('error', 'Login gagal!');
         }
     })->name('googleCallback');
@@ -67,7 +75,9 @@ Route::group(['middleware' => 'guest'], function () {
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-
+            if ($user->userType == 'admin') {
+                return redirect()->route('dashboard');
+            }
             if ($user->disable == 1) {
                 dd('account disable');
                 return redirect()->back()->withErrors(['error' => 'Your account has been disabled.']);
@@ -118,7 +128,7 @@ Route::get('/logout', function (Request $request) {
 Route::get('/login', function () {
     return view('login');
 });
-Route::get('/signUp', function () {
+Route::get('/register', function () {
     return view('signUp');
 });
 Route::get('/changePass', function () {
