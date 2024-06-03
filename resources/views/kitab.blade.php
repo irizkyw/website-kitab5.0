@@ -11,7 +11,7 @@
                                     <p class="m-0" style="font-size: 16px; line-height: 1; text-align:center"><i>{{ $data['books']->first()->books }}</i></p>
                                 </div>
                             </li>
-                            @if($data['religion'] == 'Kristen')
+                            @if(strtolower($data['religion']) == 'kristen')
                                 @foreach ($data['list_books'] as $book)
                                 <a href="{{ route('scripture.detail', ['kitab' => $data['books']->first()->books, 'book' => $book['code'], 'chapter' => $book['code'] . '.1']) }}" class="text-decoration-none">
                                     <li class="list-group-item d-flex align-items-center my-1 border" style="border-radius: 10px; z-index: 0;">
@@ -23,7 +23,7 @@
                                 @endforeach
                             @endif
 
-                            @if($data['religion'] == 'Islam')
+                            @if(strtolower($data['religion']) == 'islam')
                                 @foreach ($data['list_chapters'] as $chapter)
                                 <a href="{{ route('scripture.detail', ['kitab' => $data['books']->first()->books, 'chapter' => $chapter['id']]) }}" class="text-decoration-none">
                                     <li class="list-group-item d-flex align-items-center my-1 border" style="border-radius: 10px; z-index: 0;">
@@ -44,7 +44,7 @@
                     <div class="row border" style="border-radius: 10px">
                         <div class="text p-3">
                             <h1 style="font-size: 32px;">{{ $data['data_chapter']['chapter_name'] }}</h1>
-                            @if($data['religion'] == 'Islam')
+                            @if(strtolower($data['religion']) == 'islam')
                             <p style="font-size: 16px; line-height: 1;">{{ $data['data_chapter']['translation']; }}</p>
                             @endif
                             <div id="scrollProgressBarBackground" style="position: absolute; top: 0; left: 0; width: 0%; height: 10px; background-color: #0000; border-radius: 10px;"></div>
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                     <div class="row my-2 border" style="border-radius: 10px">
-                        @if($data['religion'] == 'Kristen')
+                        @if(strtolower($data['religion']) == 'kristen')
                         <div class="col-sm-6 p-2">
                             <h1 style="font-size: 16px">Pasal</h1>
                             <div class="dropdown">
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                         @endif
-                        <div class="{{ $data['religion'] == 'Kristen' ? 'col-sm-6' : 'col-sm-12' }} p-2">
+                        <div class="{{ strtolower($data['religion']) == 'kristen' ? 'col-sm-6' : 'col-sm-12' }} p-2">
                             <h1 style="font-size: 16px">Ayat</h1>
                             <div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle w-100 d-flex justify-content-between align-items-center" style="background-color: #33D8D8; border: none;" type="button" id="dropdownMenuButtonNumber" type="button" id="dropdownMenuButtonText" data-bs-toggle="dropdown" aria-expanded="false">

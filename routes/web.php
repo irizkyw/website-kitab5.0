@@ -134,9 +134,7 @@ Route::get('/register', function () {
 Route::get('/changePass', function () {
     return view('changePass');
 });
-Route::get('/favorite', function () {
-    return view('favorite');
-});
+
 Route::get('/contact', function () {
     return view('contact');
 });
