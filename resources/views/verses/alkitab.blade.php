@@ -7,6 +7,7 @@
 
                                             @foreach ($data['data_chapter']['verses'] as $key_verse => $verse)
                                                 @if($verse['items'] == null || $verse['items'] == '')
+                                                    null
                                                     @continue
                                                 @endif
                                                 
