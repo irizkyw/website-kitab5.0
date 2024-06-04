@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\FavoriteController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -39,4 +40,12 @@ Route::group([
 ], function ($router) {
     Route::get('/scripture', [BooksController::class, 'index']);
     Route::get('/scripture/{kitab}', [BooksController::class, 'detail_scripture'])->name('scripture.detail');
+
+    #route for favorite
+    Route::get('/favorite/create', FavoriteController::class.'@create')-> name('favorite.create');
+    Route::post('/favorite/post', FavoriteController::class.'@store')-> name('favorite.store');
+    Route::get('/favorite/show/{user_id}', FavoriteController::class.'@showByUser')-> name('favorite.showByUser');
+    Route::get('/favorite/{favorite_id}/details', FavoriteController::class.'@show')->name('favorite.show');
+    Route::delete('/favorite/delete', FavoriteController::class.'@destroy')-> name('favorite.destroy');
 });
+
