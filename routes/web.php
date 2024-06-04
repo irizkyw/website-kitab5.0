@@ -215,6 +215,8 @@ Route::get('/my_favorite', function () {
     return view('favorite', ['favorites' => $responseData]);
 })->name('client.my_favorite');
 
+Route::post('/favorite/unfavorite', [FavoriteController::class, 'unfavorite'])->name('favorite.unfavorite');
+
 // Route::group(['middleware' => 'auth'], function () {
 
 //     Route::group(['prefix' => 'client'], function () {
