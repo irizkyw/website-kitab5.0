@@ -206,6 +206,7 @@ Route::get('/search', function (Request $request) {
 
 Route::group(['middleware' => 'auth'], function () {
 
+<<<<<<< Updated upstream
     Route::group(['prefix' => 'client'], function () {
         Route::get('/', [ClientController::class, 'index'])->name('client.index');
         Route::get('/create', [ClientController::class, 'create'])->name('client.create');
@@ -215,6 +216,23 @@ Route::group(['middleware' => 'auth'], function () {
         Route::delete('/{id}/destroy', [ClientController::class, 'destroy'])->name('client.destroy');
         Route::get('/{id}', [ClientController::class, 'show'])->name('client.show');
     });
+=======
+Route::post('/favorite/unfavorite', [FavoriteController::class, 'unfavorite'])->name('favorite.unfavorite');
+
+// Route::group(['middleware' => 'auth'], function () {
+
+//     Route::group(['prefix' => 'client'], function () {
+//         Route::get('/', [ClientController::class, 'index'])->name('client.index');
+//         Route::get('/create', [ClientController::class, 'create'])->name('client.create');
+//         Route::post('/store', [ClientController::class, 'store'])->name('client.store');
+//         Route::get('/{id}/edit', [ClientController::class, 'edit'])->name('client.edit');
+//         Route::put('/{id}/update', [ClientController::class, 'update'])->name('client.update');
+//         Route::delete('/{id}/destroy', [ClientController::class, 'destroy'])->name('client.destroy');
+//         Route::get('/{id}', [ClientController::class, 'show'])->name('client.show');
+
+        
+//     });
+>>>>>>> Stashed changes
     
     Route::group(['prefix' => 'admin'], function () {
         Route::get('/', [AdminController::class, 'index'])->name('admin.index');
