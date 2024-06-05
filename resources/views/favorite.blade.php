@@ -43,77 +43,77 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.favorite-item').forEach(function (item) {
-                item.addEventListener('click', function (event) {
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('.favorite-item').click(function(event) {
+                event.preventDefault();
+
+                const chapter = $(this).data('chapter');
+                const ayatNumber = $(this).data('ayat-number');
+                const ayatArabic = $(this).data('ayat-arabic');
+                const ayatLatin = $(this).data('ayat-latin');
+                const ayatTranslation = $(this).data('ayat-translation');
+                const favoriteId = $(this).data('id');
+
+                $('#chapter-title').text(chapter);
+
+                const ayatContent = `
+                    <div class="row">
+                        <div class="col-2">
+                            <p style="font-size: 16px; line-height: 1.2;">Ayat ${ayatNumber}</p>
+                        </div>
+                        <div class="col-10">
+                            <h1 style="line-height: 1.2; font-size: 32px; text-align: right;">${ayatArabic}</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span>Artinya: </span>
+                        <div class="col-12">
+                            <p style="font-size: 16px; line-height: 1.2;">${ayatTranslation}</p>
+                        </div>
+                    </div>
+                    <a href="#" class="heart-icon" data-id="${favoriteId}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-heart-fill heart-path" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+                        </svg>
+                    </a>
+                `;
+
+                $('#ayat-container').html(ayatContent);
+
+                // Attach click event for the heart icon
+                $('.heart-icon').click(function(event) {
                     event.preventDefault();
 
-                    const chapter = this.getAttribute('data-chapter');
-                    const ayatNumber = this.getAttribute('data-ayat-number');
-                    const ayatArabic = this.getAttribute('data-ayat-arabic');
-                    const ayatLatin = this.getAttribute('data-ayat-latin');
-                    const ayatTranslation = this.getAttribute('data-ayat-translation');
+                    var heartIcon = $(this);
+                    var heartPath = heartIcon.find('.heart-path');
 
-                    document.getElementById('chapter-title').innerText = chapter;
-
-                    const ayatContent = `
-                        <div class="row">
-                            <div class="col-2">
-                                <p style="font-size: 16px; line-height: 1.2;">Ayat ${ayatNumber}</p>
-                            </div>
-                            <div class="col-10">
-                                <h1 style="line-height: 1.2; font-size: 32px; text-align: right;">${ayatArabic}</h1>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <span>Artinya: </span>
-                            <div class="col-12">
-                                <p style="font-size: 16px; line-height: 1.2;">${ayatTranslation}</p>
-                            </div>
-                        </div>
-                        <a href="#" class="heart-icon" data-id="${this.getAttribute('data-id')}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-heart-fill heart-path" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
-                            </svg>
-                        </a>
-                    `;
-
-                    document.getElementById('ayat-container').innerHTML = ayatContent;
+                    $.ajax({
+                        url: "{{ route('favorite.unfavorite') }}",
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            favorite_id: heartIcon.data('id')
+                        },
+                        success: function (response) {
+                            alert(response.message);
+                            if (response.message === 'Favorite removed successfully.') {
+                                $('#favorite-' + heartIcon.data('id')).remove();
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error:', error);
+                        }
+                    });
                 });
             });
         });
     </script>
-
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                    <script>
-                        $(document).ready(function() {
-                            $.ajaxSetup({
-                                headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                }
-                            });
-
-                            $('.heart-icon').click(function(event) {
-                                event.preventDefault();
-
-                                var heartIcon = $(this);
-                                var heartPath = heartIcon.find('.heart-path');
-                                var fill = heartPath.attr('fill') === 'red' ? 'white' : 'red';
-                                
-                                $.ajax({
-                                    url: "{{ route('favorite.destroy') }}",
-                                    type: 'DELETE',
-                                    data: {
-                                        id: heartIcon.data('id')
-                                    },
-                                    success: function (response) {
-                                        if (response.success) {
-                                            heartPath.attr('fill', fill);
-                                        }
-                                    }
-                                });
-                            });
-                        });
-                    </script>
 @stop

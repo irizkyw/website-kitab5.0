@@ -135,4 +135,16 @@ class FavoriteController extends Controller
     {
         return view('favorites.create');
     }
+    
+    public function unfavorite(Request $request)
+    {
+        $favorite = Favorite::find($request->favorite_id);
+        if (!$favorite) {
+            return response()->json(['message' => 'Favorite not found'], 404);
+        }
+
+        $favorite->delete();
+
+        return response()->json(['message' => 'Favorite removed successfully.'], 200);
+    }
 }
