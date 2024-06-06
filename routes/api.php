@@ -21,9 +21,18 @@ Route::group([
 
 ], function ($router) {
 
+<<<<<<< Updated upstream
     Route::post('/login', [AuthController::class , 'login'])->name('login');
     Route::post('/register', [AuthController::class , 'register']);
     Route::get('/logout', [AuthController::class , 'logout']);
     Route::get('/refresh', [AuthController::class , 'refresh']);
     Route::get('/me', [AuthController::class , 'me']);
+=======
+    Route::post('login', [AuthController::class , 'login']);
+    Route::post('register', [AuthController::class , 'register']);
+    Route::get('logout', [AuthController::class , 'logout']);
+    Route::get('refresh', [AuthController::class , 'refresh']);
+    Route::get('me', [AuthController::class , 'me']);
+
+>>>>>>> Stashed changes
 });

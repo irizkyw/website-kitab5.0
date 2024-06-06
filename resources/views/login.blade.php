@@ -37,6 +37,7 @@
                         <span2>Jangan lupakan ibadah dengan membaca kitab</span>
                     </p>
                     <div class="textfield">
+<<<<<<< Updated upstream:resources/views/login.blade.php
                         <form action="{{ url('/authentication') }}" method="POST">
                             @csrf
                             <span class="input-Email">
@@ -55,6 +56,19 @@
                             </div>
                             <button class="btn longBtn my-4 w-100" type="submit">Login</button>
                         </form>
+=======
+                        <span class="input-Email">
+                            <input class="form-control email my-3" type="text" name="email" id="email" placeholder="Email/username">
+                        </span>
+
+                        <span class="input-group">
+                            <input class="form-control password" type="password" name="password" id="password" placeholder="Password">
+                            {{-- <input class="form-control password" type="text" name="Email" id="Email" placeholder="Password">
+                            <button1 class="btn btn-outline-secondary" type="button" id="toggleButton" onclick="togglePasswordVisibility()">
+                                <i id="toggleIcon" class="fas fa-eye"></i>
+                            </button> --}}
+                        </span>
+>>>>>>> Stashed changes:resources/views/loginPage.blade.php
                     </div>
                     <div class="row justify-content-center my-3">
                         <div class="col-5">

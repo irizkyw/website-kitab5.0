@@ -1,6 +1,12 @@
 <?php
 
+<<<<<<< Updated upstream
 use Illuminate\Http\Request;
+=======
+use App\Http\Controllers\AuthController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+>>>>>>> Stashed changes
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -118,8 +124,10 @@ Route::get('/logout', function (Request $request) {
 Route::get('/login', function () {
     return view('login');
 });
+// Route::post('/login', [AuthController::class , 'login'])->name('login');
+
 Route::get('/signUp', function () {
-    return view('signUp');
+    return view('signUpPage');
 });
 Route::get('/changePass', function () {
     return view('changePass');
@@ -227,3 +235,24 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 });
+<<<<<<< Updated upstream
+=======
+// Route::get('/dashboard', function () {
+//     return view('/dashboard/dashboard');
+// });
+
+Route::post('/authentication', function (Request $request) {
+    $credentials = $request->only('email', 'password');
+
+    if (!Auth::attempt($credentials)) {
+        return redirect()->back()->with('alert', 'Invalid credentials');
+    }
+
+    return redirect()->route('success');
+});
+
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect()->route('login');
+})->name('logout');
+>>>>>>> Stashed changes
