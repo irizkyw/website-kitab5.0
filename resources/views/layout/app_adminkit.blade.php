@@ -71,7 +71,7 @@
 		
 						<h1 class="h3 mb-3">List Kitab</h1>
 						<div class="mb-3">
-							<button class="btn btn-primary" onclick="tambahBook()">Tambah Book</button>
+							{{-- <button class="btn btn-primary" onclick="tambahBook()">Tambah Book</button> --}}
 					</div>
 						<div class="row">
 								<div class="col-12 col-lg-12 col-xxl-12 d-flex">
@@ -82,7 +82,7 @@
 																		<th>Books</th>
 																		<th class="d-none d-xl-table-cell">Agama</th>
 																		<th class="d-none d-xl-table-cell">API Gateway</th>
-																		<th>Actions</th> <!-- New column for buttons -->
+																		{{-- <th>Actions</th> <!-- New column for buttons --> --}}
 																</tr>
 														</thead>
 														<tbody>
@@ -92,8 +92,8 @@
 																		<td class="d-none d-xl-table-cell">{{ $scripture->agama }}</td>
 																		<td class="d-none d-xl-table-cell">{{ $scripture->API_Gateaway }}</td>
 																		<td>
-																			<button class="btn btn-success btn-sm" onclick="updateBook({{ $scripture->id }})">Update</button>
-																				<button class="btn btn-danger btn-sm" onclick="deleteBook({{ $scripture->id }})">Delete</button>
+																			{{-- <button class="btn btn-success btn-sm" onclick="updateBook({{ $scripture->id }})">Update</button>
+																				<button class="btn btn-danger btn-sm" onclick="deleteBook({{ $scripture->id }})">Delete</button> --}}
 																		</td>
 																</tr>
 																@endforeach
