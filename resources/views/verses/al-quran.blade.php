@@ -16,12 +16,60 @@
                                         <p style="font-size: 16px; line-height: 1.2;">{{ $verse['teksIndonesia'] }}</p>
                                     </div>
                                 </div>
-                                <a href="#" class="heart-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-heart-fill heart-path" viewBox="0 0 16 16">
+                                @php
+                                    $isFavorite = false;
+                                    foreach ($data['favorites'] as $fav) {
+                                        if ($fav->ayat == $verse['nomorAyat'] && $fav->book_id == $data['books']->first()->id && $fav->chapter == $data['data_chapter']['chapter_id']) {
+                                            $isFavorite = true;
+                                            break;
+                                        }
+                                    }
+                                @endphp
+                                <a href="#" class="heart-icon" data-verse="{{ $verse['nomorAyat'] }}" data-book="{{ $data['books']->first()->id }}" data-chapter="{{ $data['data_chapter']['chapter_id'] }}" data-religion="{{ $data['religion'] }}" data-from="{{ session()->get('user.id') }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="{{ $isFavorite ? 'red' : 'white' }}" class="bi bi-heart-fill heart-path" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
                                     </svg>
                                 </a>
+
                             </div>
                         </div>
                         @endforeach
                     </div>
+
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            $.ajaxSetup({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                            });
+
+                            $('.heart-icon').click(function(event) {
+                                event.preventDefault();
+
+                                var heartIcon = $(this);
+                                var heartPath = heartIcon.find('.heart-path');
+                                var fill = heartPath.attr('fill') === 'red' ? 'white' : 'red';
+                                
+                                $.ajax({
+                                    url: "{{ route('favorite.store') }}",
+                                    type: 'POST',
+                                    data: {
+                                        verse: heartIcon.data('verse'),
+                                        book: heartIcon.data('book'),
+                                        chapter: heartIcon.data('chapter'),
+                                        religion: heartIcon.data('religion'),
+                                        from: heartIcon.data('from')
+                                    },
+                                    success: function(response) {
+                                        heartPath.attr('fill', fill);
+                                    },
+                                    error: function(xhr) {
+                                        alert('Silahkan login terlebih dahulu');
+                                    }
+                                });
+                            });
+                        });
+                    </script>
+                    

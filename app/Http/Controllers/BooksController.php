@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Books;
+use App\Models\Favorite;
 
 class BooksController extends Controller
 {
@@ -33,6 +34,15 @@ class BooksController extends Controller
      * Show the form for creating a new resource.
      */
     public  function detail_scripture(Request $request, $book){
+
+        
+        // dd session()->get('user');
+        if (empty($book)){
+            return response()->json(['error' => 'Book tidak ditemukan.'], 404);
+        }
+
+        
+
         $chapter = $request->query('chapter');
         $books = Books::where('books', $book)->get();
         if (empty($books->first()->API_Gateaway)){
@@ -41,14 +51,20 @@ class BooksController extends Controller
         $list_books = NULL;
         $list_chapters = NULL;
         $data_chapter = NULL;
+        $favorites = [];
 
+        if(session()->get('user')){
+            $user = session()->get('user');
+            $favorites = Favorite::where('user_id', $user->id)->get();
+        }
         // GET LIST CHAPTER
             // Islam
-            if ($books->first()->agama == 'Islam') {
+            if ($books->first()->agama == 'islam') {
                 if (empty($chapter)){
                     $chapter = 1;
                 }
-                $list_chapters = $this->format_list_chapter_AlQuran($book);
+                
+                $list_chapters = $this->format_list_chapter_AlQuran();
                 $data_chapter = $this->format_DetailChapter_AlQuran($chapter);
                 if ($request->is('api/*')) {
                     return response()->json([
@@ -60,9 +76,8 @@ class BooksController extends Controller
                 }
             }
             // End Islam
-
             // KRISTEN
-            if ($books->first()->agama == 'Kristen') {
+            if ($books->first()->agama == 'kristen') {
                 $book_chapters = $request->query('book');
                 if (empty($chapter) || empty($book_chapters)){
                     $book_chapters = 'GEN';
@@ -83,51 +98,19 @@ class BooksController extends Controller
             }
             // END KRISTEN
         // END GET LIST CHAPTER
-    
         $data = [
             'religion' => $books->first()->agama,
             'books' => $books,
             'list_books' => $list_books,
             'list_chapters' => $list_chapters,
             'data_chapter' => $data_chapter,
+            'favorites' => $favorites,
         ];
         if (isset($data['data_chapter']['error'])) {
             return response()->json($data['data_chapter'], 404);
         }
         return view('kitab', compact('data'));
     }
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
-
 
     /**
      * Format the al-quran data.

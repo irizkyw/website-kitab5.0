@@ -25,6 +25,17 @@
 
     <section class="loginPage">
         <div class="container  my-5">
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="row">
                 <div class="col-sm-6 login_left d-flex flex-column justify-content-center ">
                     <a href="{{ url('/landingPage') }}" >
@@ -90,7 +101,6 @@
             </div>
         </div>
     </section>
-
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

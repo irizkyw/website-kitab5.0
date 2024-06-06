@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\BooksController;
 use App\Models\User;
+use App\Http\Controllers\FavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,12 +100,12 @@ Route::group(['middleware' => 'guest'], function () {
         $authController = new AuthController();
         $response = $authController->register($request);
         $responseData = json_decode($response->getContent(), true);
-        if ($responseData['message'] === 'Pendaftaran berhasil') {
+        if (isset($responseData['message']) && $responseData['message'] === 'Pendaftaran berhasil') {
             return redirect('/login')->with('success', 'Registrasi berhasil!');
         } else {
-            return $response;
+            return redirect('/signUp')->with('error', 'Registrasi gagal!');
         }
-    })->name('register');
+    })->name('register.user');
 
     Route::get('/landingPage', function () {
         $token = session('access_token');
@@ -176,7 +177,7 @@ Route::get('/search', function (Request $request) {
     if ($response->successful()) {
         $chapters = $response->json();
         
-        if ($verseNumber === null) { // Jika tidak ada nomor ayat yang dicari
+        if ($verseNumber === null) {
             $format_chapters = [
                 'chapter_id' => $chapters['data']['nomor'],
                 'chapter_name' => $chapters['data']['nama'],
@@ -212,26 +213,42 @@ Route::get('/search', function (Request $request) {
     }
 });
 
-Route::group(['middleware' => 'auth'], function () {
+Route::get('/my_favorite', function () {
+    $user = session('user');
+    $favoriteController = new FavoriteController();
+    $response = $favoriteController->showByUser($user['id']);
+    $responseData = json_decode($response->getContent(), true);
+    if (isset($responseData['message']) && $responseData['message'] === 'Favorite not found') {
+        return view('favorite', ['favorites' => []]);
+    }
+    // dd($responseData);
+    return view('favorite', ['favorites' => $responseData]);
+})->name('client.my_favorite');
 
-    Route::group(['prefix' => 'client'], function () {
-        Route::get('/', [ClientController::class, 'index'])->name('client.index');
+Route::post('/favorite/unfavorite', [FavoriteController::class, 'unfavorite'])->name('favorite.unfavorite');
+
+// Route::group(['middleware' => 'auth'], function () {
+
+//     Route::group(['prefix' => 'client'], function () {
+//         Route::get('/', [ClientController::class, 'index'])->name('client.index');
         Route::get('/create', [ClientController::class, 'create'])->name('client.create');
-        Route::post('/store', [ClientController::class, 'store'])->name('client.store');
-        Route::get('/{id}/edit', [ClientController::class, 'edit'])->name('client.edit');
-        Route::put('/{id}/update', [ClientController::class, 'update'])->name('client.update');
-        Route::delete('/{id}/destroy', [ClientController::class, 'destroy'])->name('client.destroy');
-        Route::get('/{id}', [ClientController::class, 'show'])->name('client.show');
-    });
-    
-    Route::group(['prefix' => 'admin'], function () {
-        Route::get('/', [AdminController::class, 'index'])->name('admin.index');
-        Route::get('/create', [AdminController::class, 'create'])->name('admin.create');
-        Route::post('/store', [AdminController::class, 'store'])->name('admin.store');
-        Route::get('/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
-        Route::put('/{id}/update', [AdminController::class, 'update'])->name('admin.update');
-        Route::delete('/{id}/destroy', [AdminController::class, 'destroy'])->name('admin.destroy');
-        Route::get('/{id}', [AdminController::class, 'show'])->name('admin.show');
-    });
+//         Route::post('/store', [ClientController::class, 'store'])->name('client.store');
+//         Route::get('/{id}/edit', [ClientController::class, 'edit'])->name('client.edit');
+//         Route::put('/{id}/update', [ClientController::class, 'update'])->name('client.update');
+//         Route::delete('/{id}/destroy', [ClientController::class, 'destroy'])->name('client.destroy');
+//         Route::get('/{id}', [ClientController::class, 'show'])->name('client.show');
 
-});
+        
+//     });
+    
+//     Route::group(['prefix' => 'admin'], function () {
+//         Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+//         Route::get('/create', [AdminController::class, 'create'])->name('admin.create');
+//         Route::post('/store', [AdminController::class, 'store'])->name('admin.store');
+//         Route::get('/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
+//         Route::put('/{id}/update', [AdminController::class, 'update'])->name('admin.update');
+//         Route::delete('/{id}/destroy', [AdminController::class, 'destroy'])->name('admin.destroy');
+//         Route::get('/{id}', [AdminController::class, 'show'])->name('admin.show');
+//     });
+
+// });
