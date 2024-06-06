@@ -35,7 +35,6 @@
                                 </a>
                                 @endforeach
                             @endif
-
                         </ol>
                     </div>
                 </div>

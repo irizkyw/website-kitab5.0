@@ -205,6 +205,11 @@ Route::get('/search', function (Request $request) {
 
 Route::get('/my_favorite', function () {
     $user = session('user');
+
+    if (!$user) {
+        return redirect('/login')->with('error', 'Anda harus login terlebih dahulu!');
+    }
+    
     $favoriteController = new FavoriteController();
     $response = $favoriteController->showByUser($user['id']);
     $responseData = json_decode($response->getContent(), true);
