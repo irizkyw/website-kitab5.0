@@ -26,7 +26,6 @@ class BooksController extends Controller
      */
     public  function detail_scripture(Request $request, $book){
 
-        
         // dd session()->get('user');
         if (empty($book)){
             return response()->json(['error' => 'Book tidak ditemukan.'], 404);
@@ -50,13 +49,14 @@ class BooksController extends Controller
         }
         // GET LIST CHAPTER
             // Islam
-            if ($books->first()->agama == 'islam') {
+            // str to lower
+            $agama = strtolower($books->first()->agama);
+            if ($agama == 'islam') {
                 if (empty($chapter)){
                     $chapter = 1;
                 }
-                
-                $list_chapters = $this->format_list_chapter_AlQuran();
-                $data_chapter = $this->format_DetailChapter_AlQuran($chapter);
+                $list_chapters = $this->format_list_chapter_AlQuran($agama);
+                $data_chapter = $this->format_DetailChapter_AlQuran($chapter, $agama);
                 if ($request->is('api/*')) {
                     return response()->json([
                         'religion' => $books->first()->agama,
@@ -68,7 +68,7 @@ class BooksController extends Controller
             }
             // End Islam
             // KRISTEN
-            if ($books->first()->agama == 'kristen') {
+            if ($agama == 'kristen') {
                 $book_chapters = $request->query('book');
                 if (empty($chapter) || empty($book_chapters)){
                     $book_chapters = 'GEN';
@@ -106,17 +106,15 @@ class BooksController extends Controller
     /**
      * Format the al-quran data.
      */
-    public function format_list_chapter_AlQuran()
+    public function format_list_chapter_AlQuran($agama)
     {
-        $API = Books::where('agama', 'Islam')->first()->API_Gateaway;
+        $API = Books::where('agama', $agama)->first()->API_Gateaway;
         if (empty($API)){
             return response()->json(['error' => 'API Gateaway tidak ditemukan.'], 404);
         }
-
-        $response = Http::get($API . '/surat');
+        $response = Http::get(trim($API) . '/surat');
         if ($response->successful()) {
             $data = $response->json();
-            
             $format_data = [];
             foreach ($data['data'] as $key => $value) {
                 $format_data[] = [
@@ -134,12 +132,12 @@ class BooksController extends Controller
         ];
     }
 
-    public function format_DetailChapter_AlQuran($chapter){
-        $API = Books::where('agama', 'Islam')->first()->API_Gateaway;
+    public function format_DetailChapter_AlQuran($chapter, $agama){
+        $API = Books::where('agama', $agama)->first()->API_Gateaway;
         if (empty($API)){
             return response()->json(['error' => 'API Gateaway tidak ditemukan.'], 404);
         }
-        $response = Http::get($API . '/surat/' . $chapter);
+        $response = Http::get(trim($API) . '/surat/' . $chapter);
         $format_chapter = [];
         if($response->successful()){
             $chapter = $response->json();
