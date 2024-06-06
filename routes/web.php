@@ -207,7 +207,7 @@ Route::get('/my_favorite', function () {
     $user = session('user');
 
     if (!$user) {
-        return redirect('/login')->with('error', 'Anda harus login terlebih dahulu!');
+        return redirect()->back()->with('error', 'Anda harus login terlebih dahulu!');
     }
     
     $favoriteController = new FavoriteController();

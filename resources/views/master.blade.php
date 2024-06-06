@@ -25,6 +25,17 @@
   </section>
 
   <section class="content" style="margin-bottom: 5em;">
+  @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+      @endif
+
+        @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+        @endif
     @yield('content')
   </section>
   @if (session()->has('access_token'))
@@ -36,11 +47,12 @@
         <div class="footer-content border-top">
             <p style="text-align: center">&copy; Copyright KitabSuci. Made by Kelompok 7 ABP</p>
         </div>
-    </section>
-    
-  <script src="./main.js"></script>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="./main.js"></script>
   <script>
     const url = window.location.pathname;
     const navLinks = document.querySelectorAll('.nav-link');
