@@ -90,12 +90,12 @@ Route::group(['middleware' => 'guest'], function () {
         $authController = new AuthController();
         $response = $authController->register($request);
         $responseData = json_decode($response->getContent(), true);
-        if ($responseData['message'] === 'Pendaftaran berhasil') {
+        if (isset($responseData['message']) && $responseData['message'] === 'Pendaftaran berhasil') {
             return redirect('/login')->with('success', 'Registrasi berhasil!');
         } else {
-            return $response;
+            return redirect('/signUp')->with('error', 'Registrasi gagal!');
         }
-    })->name('register');
+    })->name('register.user');
 
     Route::get('/landingPage', function () {
         $token = session('access_token');
@@ -209,7 +209,7 @@ Route::get('/my_favorite', function () {
     $response = $favoriteController->showByUser($user['id']);
     $responseData = json_decode($response->getContent(), true);
     if (isset($responseData['message']) && $responseData['message'] === 'Favorite not found') {
-        return view('myFavorite', ['favorites' => []]);
+        return view('favorite', ['favorites' => []]);
     }
     // dd($responseData);
     return view('favorite', ['favorites' => $responseData]);
@@ -221,7 +221,7 @@ Route::post('/favorite/unfavorite', [FavoriteController::class, 'unfavorite'])->
 
 //     Route::group(['prefix' => 'client'], function () {
 //         Route::get('/', [ClientController::class, 'index'])->name('client.index');
-//         Route::get('/create', [ClientController::class, 'create'])->name('client.create');
+        Route::get('/create', [ClientController::class, 'create'])->name('client.create');
 //         Route::post('/store', [ClientController::class, 'store'])->name('client.store');
 //         Route::get('/{id}/edit', [ClientController::class, 'edit'])->name('client.edit');
 //         Route::put('/{id}/update', [ClientController::class, 'update'])->name('client.update');

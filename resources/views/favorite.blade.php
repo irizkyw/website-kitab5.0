@@ -103,10 +103,10 @@
                             favorite_id: heartIcon.data('id')
                         },
                         success: function (response) {
-                            alert(response.message);
                             if (response.message === 'Favorite removed successfully.') {
-                                $('#favorite-' + heartIcon.data('id')).remove();
+                                location.reload();
                             }
+                            alert(response.message);
                         },
                         error: function (xhr, status, error) {
                             console.error('Error:', error);

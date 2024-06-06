@@ -119,18 +119,6 @@ class FavoriteController extends Controller
         return response()->json($list_favorite);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        dd($id);
-        $favorite = Favorite::find($id);
-        $favorite->delete();
-
-        return redirect()->route('favorite.showByUser', ['user_id' => $favorite->user_id])->with('success', 'Favorite deleted successfully.');
-    }
-
     public function create()
     {
         return view('favorites.create');

@@ -37,26 +37,25 @@
                         <span2>Saya suka membaca kitab</span>
                     </p>
                     <div class="textfield">
-                        <span class="input-Email">
-                            <input class="form-control email my-3" type="text" name="Email" id="Email" placeholder="Your Name">
-                        </span>
+                        <form action="{{ route('register.user') }}" method="POST">
+                            @csrf
+                            <span class="input-Email">
+                                <input class="form-control email my-3" type="text" name="email" id="email" placeholder="Email">
+                            </span>
 
-                        <span class="input-Nickname">
-                            <input class="form-control nickname my-3" type="text" name="Email" id="Email" placeholder="Nickname">
-                        </span>
+                            <span class="input-Email/username">
+                                <input class="form-control email my-3" type="text" name="name" id="name" placeholder="Your Full name">
+                            </span>
 
-                        <span class="input-Email/username">
-                            <input class="form-control email my-3" type="text" name="Email" id="Email" placeholder="Email/username">
-                        </span>
-
-                        <span class="input-Password">
-                            <input class="form-control password" type="password" name="Email" id="Email" placeholder="Password">
-                        </span>
-                    </div>
-                    <div class="textPass my-2 mx-4">
-                        <p>Your password must be 8-20 characters long, contain letters and number, and must not contain spaces, special character, or emoji.</p>
-                    </div>
-                    <a class="btn longBtn my-4" data-bs-target="#" data-bs-toggle="modal" type="submit">Sign-Up</a>
+                            <span class="input-Password">
+                                <input class="form-control password" type="password" name="password" id="password" placeholder="Password">
+                                <div class="textPass my-2 mx-4">
+                                    <p>Your password must be 8-20 characters long, contain letters and number, and must not contain spaces, special character, or emoji.</p>
+                                </div>
+                            </span>
+                            <button class="btn longBtn my-4 w-100" type="submit">Sign-Up</button>
+                        </form>
+                        </div>
                     <div class="row justify-content-center my-3">
                         <div class="col-5">
                             <hr>

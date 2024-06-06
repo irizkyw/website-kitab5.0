@@ -66,7 +66,7 @@
                                         heartPath.attr('fill', fill);
                                     },
                                     error: function(xhr) {
-                                        alert('An error occurred while processing the request.');
+                                        alert('Silahkan login terlebih dahulu');
                                     }
                                 });
                             });
